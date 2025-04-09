@@ -1,23 +1,24 @@
-import { Trash2 } from "lucide-react";
+const EventCard = ({ event }) => (
+  <div className="bg-[#1E1E1E] border border-[#333] rounded-xl p-4 shadow-md text-white relative">
+    <img
+      src={event.image}
+      alt={event.title}
+      className="w-full h-32 object-cover rounded-lg mb-3"
+    />
+    <h3 className="text-lg font-semibold line-clamp-1">{event.title}</h3>
+    <p className="text-sm text-gray-400 line-clamp-1">{event.location}</p>
+    <p className="text-sm text-gray-500 mb-2">{event.date}</p>
 
-const DiscountCard = ({ coupon, onDelete }) => {
-  return (
-    <div className="bg-cards border border-borderCard p-4 rounded-xl text-white relative shadow-md">
-      <h4 className="text-md font-bold text-accent">{coupon.code}</h4>
-      <p className="text-sm text-dark-text">{coupon.description}</p>
-      <p className="text-2xl font-bold mt-2">{coupon.discount}% OFF</p>
-      <p className="text-xs text-dark-text/50 mt-1">
-        Expires: {coupon.expires}
-      </p>
-
-      <button
-        onClick={() => onDelete(coupon.code)}
-        className="absolute top-3 right-3 hover:text-red-500"
-      >
-        <Trash2 size={18} />
-      </button>
+    <div className="flex justify-between text-xs text-gray-400 mt-2">
+      <span>Tickets: {event.tickets}</span>
+      <span>Guestlist: {event.guestlist}</span>
+      <span>Hotel: {event.hotel}</span>
     </div>
-  );
-};
 
-export default DiscountCard;
+    <div className="absolute top-4 right-4 bg-emerald-600 text-sm px-2 py-1 rounded-md font-semibold">
+      €{event.price}
+    </div>
+  </div>
+);
+
+export default EventCard;

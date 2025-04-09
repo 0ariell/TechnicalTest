@@ -1,4 +1,3 @@
-import { useState } from "react";
 import EventCard from "../components/EventCard";
 import DiscountSection from "../components/DiscountSection";
 
@@ -43,18 +42,10 @@ const events = [
     price: "5.759,35",
     image: "/images/kizomba-banner.jpg",
   },
-  // ...repetí los eventos como hiciste antes o cargalos desde un array más grande
+  // Agregá más eventos si querés
 ];
 
 const MainContent = () => {
-  const [visibleCount, setVisibleCount] = useState(6); // Cantidad inicial a mostrar
-
-  const loadMore = () => {
-    setVisibleCount((prev) => prev + 6); // Cargamos 6 eventos más
-  };
-
-  const visibleEvents = events.slice(0, visibleCount); // Solo mostramos hasta el límite actual
-
   return (
     <main className="flex w-full flex-col xl:flex-row gap-6 px-6 py-8">
       {/* Columna de eventos */}
@@ -64,22 +55,10 @@ const MainContent = () => {
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {visibleEvents.map((event, index) => (
+          {events.map((event, index) => (
             <EventCard key={index} event={event} />
           ))}
         </div>
-
-        {/* Botón para cargar más */}
-        {visibleCount < events.length && (
-          <div className="mt-6 text-center">
-            <button
-              onClick={loadMore}
-              className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-md font-semibold transition"
-            >
-              Load More
-            </button>
-          </div>
-        )}
       </div>
 
       {/* Columna derecha: Cupones */}
