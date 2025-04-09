@@ -9,10 +9,9 @@ import {
   FaUserFriends,
   FaBuilding,
   FaChartBar,
-  FaTimes,
 } from "react-icons/fa";
 
-const Sidebar = ({ isOpen, onClose }) => {
+const Sidebar = () => {
   const [activeItem, setActiveItem] = useState("Events");
 
   const menuItems = [
@@ -29,42 +28,27 @@ const Sidebar = ({ isOpen, onClose }) => {
   ];
 
   return (
-    <aside
-      className={`bg-[#1E1E1E] text-white fixed md:static top-0 left-0 w-64 z-40 p-4 transition-transform duration-300 flex flex-col h-screen ${
-        isOpen ? "translate-x-0" : "-translate-x-full"
-      } md:translate-x-0`}
-    >
-      {/* Mobile header con botón cerrar */}
-      <div className="flex justify-between items-center md:hidden mb-6">
-        <h1 className="text-2xl font-bold pl-2 text-cyan-400">
+    <aside className="sticky top-0 h-screen w-64 shrink-0 bg-gradient-to-b from-[#1A1A1A] to-[#111] text-white p-5 flex flex-col justify-between shadow-lg border-r border-[#2A2A2A]">
+      <div>
+        <h1 className="text-2xl font-bold mb-10 pl-2 tracking-wide text-cyan-400">
           <span className="text-white">DIZ</span>IZID
         </h1>
-        <button onClick={onClose} className="text-white text-2xl">
-          <FaTimes />
-        </button>
+
+        <nav className="flex flex-col gap-1">
+          {menuItems.map((item) => (
+            <SidebarItem
+              key={item.label}
+              icon={item.icon}
+              label={item.label}
+              active={activeItem === item.label}
+              onClick={() => setActiveItem(item.label)}
+            />
+          ))}
+        </nav>
       </div>
 
-      {/* Título desktop */}
-      <h1 className="hidden md:block text-2xl font-bold mb-8 pl-2 text-cyan-400">
-        <span className="text-white">DIZ</span>IZID
-      </h1>
-
-      {/* Contenido navegable que crece para empujar footer */}
-      <nav className="space-y-2 flex-grow overflow-y-auto">
-        {menuItems.map((item) => (
-          <SidebarItem
-            key={item.label}
-            icon={item.icon}
-            label={item.label}
-            active={activeItem === item.label}
-            onClick={() => setActiveItem(item.label)}
-          />
-        ))}
-      </nav>
-
-      {/* Footer siempre pegado al fondo */}
-      <div className="text-xs text-gray-500 pl-2 mt-auto">
-        Ariel Rivero - PruebaTecnica Verif
+      <div className="text-xs text-gray-500 pl-2">
+        Ariel Rivero - Prueba Técnica Verif
       </div>
     </aside>
   );
@@ -72,13 +56,25 @@ const Sidebar = ({ isOpen, onClose }) => {
 
 const SidebarItem = ({ icon, label, active, onClick }) => (
   <div
-    className={`flex items-center gap-3 px-3 py-2 rounded-md cursor-pointer hover:bg-gray-700 transition-colors ${
-      active ? "bg-[#2A2A2A]" : ""
+    className={`group flex items-center gap-3 px-4 py-2 rounded-lg cursor-pointer transition-all duration-200 relative ${
+      active
+        ? "bg-[#232323] text-cyan-400 font-semibold"
+        : "hover:bg-[#2E2E2E] text-gray-300"
     }`}
     onClick={onClick}
   >
-    <span className="text-lg">{icon}</span>
-    <span className="text-sm font-medium">{label}</span>
+    <span
+      className={`text-lg transition-colors ${
+        active ? "text-cyan-400" : "group-hover:text-white"
+      }`}
+    >
+      {icon}
+    </span>
+    <span className="text-sm">{label}</span>
+
+    {active && (
+      <div className="absolute left-0 top-1/2 -translate-y-1/2 h-5 w-1 bg-cyan-400 rounded-r-md"></div>
+    )}
   </div>
 );
 

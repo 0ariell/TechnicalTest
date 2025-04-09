@@ -8,21 +8,11 @@
     background: linear-gradient(to bottom, #464646, #111111);
   }
 
-  h1,
-  h2,
-  h3 {
+  h1, h2, h3 {
     @apply text-white font-semibold;
   }
 
   p {
     @apply text-dark-text;
   }
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
 }
