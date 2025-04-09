@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply text-white;
+    background: linear-gradient(to bottom, #464646, #111111);
+  }
+
+  h1, h2, h3 {
+    @apply text-white font-semibold;
+  }
+
+  p {
+    @apply text-dark-text;
+  }
+}
