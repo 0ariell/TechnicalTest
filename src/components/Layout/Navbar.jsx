@@ -2,7 +2,7 @@ import { ChevronRight, Search, Settings } from "lucide-react";
 
 const Navbar = () => {
   return (
-    <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
+    <div className="flex items-center justify-between px-6 py-4">
       {/* Breadcrumb */}
       <div className="flex items-center text-sm text-white/80 space-x-2">
         <span className="text-white font-semibold">Events</span>

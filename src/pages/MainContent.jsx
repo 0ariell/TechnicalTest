@@ -1,5 +1,5 @@
-import EventCard from "../components/EventCard";
-import DiscountSection from "../components/DiscountSection";
+import EventCard from "../components/Event/EventCard";
+import DiscountSection from "../components/Discount/DiscountSection";
 
 const events = [
   {
@@ -10,7 +10,7 @@ const events = [
     guestlist: 29,
     hotel: 112,
     price: "5.759,35",
-    image: "/images/kizomba-banner.jpg",
+    image: "/img/eventoIMG.png",
   },
   {
     title: "Albania Kizomba Festival",
@@ -20,44 +20,35 @@ const events = [
     guestlist: 29,
     hotel: 112,
     price: "5.759,35",
-    image: "/images/kizomba-banner.jpg",
+    image: "/img/eventoIMG.png",
   },
-  {
-    title: "Albania Kizomba Festival",
-    location: "Grand Blue Fafa Resort",
-    date: "8 May 2024 22:00",
-    tickets: 276,
-    guestlist: 29,
-    hotel: 112,
-    price: "5.759,35",
-    image: "/images/kizomba-banner.jpg",
-  },
-  {
-    title: "Albania Kizomba Festival",
-    location: "Grand Blue Fafa Resort",
-    date: "8 May 2024 22:00",
-    tickets: 276,
-    guestlist: 29,
-    hotel: 112,
-    price: "5.759,35",
-    image: "/images/kizomba-banner.jpg",
-  },
-  // Agregá más eventos si querés
 ];
 
 const MainContent = () => {
   return (
     <main className="flex w-full flex-col xl:flex-row gap-6 px-6 py-8">
-      {/* Columna de eventos */}
-      <div className="flex-1">
-        <h2 className="text-xl font-semibold text-white mb-6">
-          Upcoming Events
-        </h2>
+      {/* Contenedor izquierdo: todos los eventos */}
+      <div className="flex-1 flex flex-col gap-10">
+        {/* Upcoming Events */}
+        <div>
+          <h2 className="text-xl font-semibold text-white mb-4">
+            Upcoming Events
+          </h2>
+          <div className="grid grid-cols-2 gap-x-3 gap-y-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+            {events.map((event, index) => (
+              <EventCard key={`upcoming-${index}`} event={event} />
+            ))}
+          </div>
+        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {events.map((event, index) => (
-            <EventCard key={index} event={event} />
-          ))}
+        {/* Past Events */}
+        <div>
+          <h2 className="text-xl font-semibold text-white mb-4">Past Events</h2>
+          <div className="grid grid-cols-2 gap-x-3 gap-y-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+            {events.map((event, index) => (
+              <EventCard key={`past-${index}`} event={event} />
+            ))}
+          </div>
         </div>
       </div>
 

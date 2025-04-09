@@ -1,5 +1,5 @@
-import Navbar from "./components/Navbar";
-import Sidebar from "./components/SideBar";
+import Navbar from "./components/Layout/Navbar";
+import Sidebar from "./components/Layout/Sidebar";
 import MainContent from "./pages/MainContent";
 
 function App() {
