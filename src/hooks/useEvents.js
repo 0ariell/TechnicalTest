@@ -1,29 +1,38 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const API_URL = "https://eventflairs-apidev.azurewebsites.net/api/EventService";
-
-const useEvents = () => {
-  const [events, setEvents] = useState([]);
-  const [loading, setLoading] = useState(false);
+const useEventById = (id) => {
+  const [event, setEvent] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const FetchEvents = async () => {
+    const fetchEvent = async () => {
       try {
-        const res = await axios.get(`${API_URL}/GetAll`);
-        setEvents(res.data.PayLoad || []);
+        const res = await axios.get(
+          `https://eventflairs-apidev.azurewebsites.net/api/Event/Get/${id}`,
+          {
+            headers: {
+              Accept: "text/plain", // Este es el header que Swagger usa
+            },
+          }
+        );
+
+        console.log("Full Response:", res);
+        // Verificamos si hay PayLoad
+        setEvent(res.data.PayLoad || res.data.payLoad || null);
       } catch (err) {
+        console.error("Error fetching event:", err);
         setError(err);
       } finally {
         setLoading(false);
       }
     };
 
-    FetchEvents();
-  }, []);
+    if (id) fetchEvent();
+  }, [id]);
 
-  return { events, loading, error };
+  return { event, loading, error };
 };
 
-export default useEvents;
+export default useEventById;
