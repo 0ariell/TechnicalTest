@@ -7,19 +7,20 @@ const useEventById = (id) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    //Fetching
     const fetchEvent = async () => {
       try {
         const res = await axios.get(
           `https://eventflairs-apidev.azurewebsites.net/api/Event/Get/${id}`,
           {
+            //Header de Swagger (think)
             headers: {
-              Accept: "text/plain", // Este es el header que Swagger usa
+              Accept: "text/plain",
             },
           }
         );
 
         console.log("Full Response:", res);
-        // Verificamos si hay PayLoad
         setEvent(res.data.PayLoad || res.data.payLoad || null);
       } catch (err) {
         console.error("Error fetching event:", err);
@@ -31,6 +32,8 @@ const useEventById = (id) => {
 
     if (id) fetchEvent();
   }, [id]);
+
+//Props usables
 
   return { event, loading, error };
 };
